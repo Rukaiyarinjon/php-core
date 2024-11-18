@@ -48,11 +48,11 @@
     echo "<br/>";
 
 
-    // shift array
-    $a=array("red","green","blue","pink");
-     array_shift($a);
-    print_r ($a);
-    echo "<br/>";
+    // // shift array
+    // $a=array("red","green","blue","pink");
+    //  array_shift($a);
+    // print_r ($a);
+    // echo "<br/>";
 
 
     // unshift array
