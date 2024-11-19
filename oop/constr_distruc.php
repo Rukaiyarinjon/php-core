@@ -100,6 +100,9 @@
 
     class User {
         public static $name="hello world!" . "<br>";
+        public static  function info(){
+            echo "This is static method <br>";
+        }
 
 
         // $person = new user;
@@ -107,6 +110,7 @@
     }
     
     echo User :: $name;
+    echo User :: info();
     echo User :: $name ="my world";
 
     // echo $person->name="my world";
