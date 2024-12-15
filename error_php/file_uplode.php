@@ -1,26 +1,34 @@
 <?php
 if(isset($_POST['btnSubmit'])){
+    // $filcheck=$_FILES['my_file'];
     $filename=$_FILES['my_file']['name'];
-    $tmp_file=$_FILES['my_file']["tmp_name"];
+    $tmp_file=$_FILES['my_file']['tmp_name'];
     $file_size=$_FILES['my_file']['size'];
-    $file_type=$_FILES['my_file']['type'];
-    $img='image/';
+    // $file_type= $_FILES['my_file']['type'];
+    $img='my_image/';
     $kb = $file_size/1024;
 
-    if($kb>120){
-        echo "File is too large!";
-    }elseif($file_type !== "image/jpeg"){
-        echo "Type must be jpeg(JPEG formate!)";
-    }elseif(empty($filename)){
-        echo "Enter a file!";
-    }else{
-        move_uploaded_file($tmp_file,$img. $filename);
-        echo "successfully!";
-    }
+   
     
-    //var_dump($filename);
-}
+    $fileType = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
+    // check image type 
+    if (!in_array($fileType, ["jpg", "png", "jpeg"])) {
+        $msg2 = "Also Sorry, only jpg, png, jpeg, or gif formats are allowed!";
+    }
+    // check image size 
+    elseif($kb<100){
+        // upload file 
+        move_uploaded_file($tmp_file,$img.$filename);
+        echo "Successfully Uploaded!";
+    }else{
+        $msg ="Image is too large. Your image must be a maximum of 100 KB.";
+    }
+
+    
+    // var_dump( $filcheck);
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -131,6 +139,13 @@ if(isset($_POST['btnSubmit'])){
 
         <!-- Error message for invalid upload -->
         <div class="error">
+        <?php 
+        echo isset($msg) ? $msg : '';
+        ?>
+          <?php 
+        echo isset($msg2) ? $msg2 : '';
+        ?>
+
             <!-- Error message would be displayed here if there is any issue -->
         </div>
     </div>
